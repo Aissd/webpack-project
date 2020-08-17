@@ -27,3 +27,7 @@ a.log();
 
 
 console.log('~~~~~~~~~');
+
+
+let $h1 = $('h1');
+console.log($h1.text());

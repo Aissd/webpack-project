@@ -43,6 +43,10 @@ module.exports = {
         //     '$': jquery
         // }),
         // new CleanWebpackPlugin()
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
     ],
     optimization: {
         minimizer: [
