@@ -45,7 +45,10 @@ module.exports = {
         // new CleanWebpackPlugin()
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery'
+            
         })
     ],
     optimization: {
@@ -65,6 +68,15 @@ module.exports = {
     //         bootstrap: 'bootstrap/dist/css/bootstrap.css'
     //     }
     // },
+    resolve: {// 解析第三方插件包
+		modules: [path.resolve('node_modules')],  //限制模块查找范围
+		mainFields: ['style', 'main'],// 主文件查找区域 先 style 后main 
+		extensions: ['.js', '.css', '.less'], // 自动添加文件后缀名  依次寻找文件
+        alias: {   // 起别名 
+            '@': path.resolve(__dirname, 'src'),
+            '@static': path.resolve(__dirname, 'static')
+        }
+    },
     module: {
         rules: [
             {
@@ -103,6 +115,13 @@ module.exports = {
             //     test: /\.html$/i,
             //     use: 'html-withimg-loader'
             // },
+            {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, use: ['url-loader']},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, use: ['url-loader']},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, use: ['url-loader']},
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: ['url-loader']
+            },
             {
                 test: /\.(png|jpg|jpeg|gif)$/,
                 use: {
